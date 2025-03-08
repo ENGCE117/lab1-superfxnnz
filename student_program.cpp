@@ -1,39 +1,31 @@
-#include <iostream>
+#include <stdio.h>
 
-using namespace std;
-
-void GetMatrix(int *value, int row, int col);
-void PrintMatrix(int *value, int row, int col);
+int GetSet( int arr[ ] ) ;
 
 int main() {
-    int m = 3, n = 3;
-    int *data = new int[m * n];  // จองหน่วยความจำแบบ 1 มิติแทน 2 มิติ
+    int *data, num ;  // กำหนดอาร์เรย์ขนาดคงที่
+    num = GetSet( data ) ;
 
-    GetMatrix(data, m, n);
-    PrintMatrix(data, m, n);
+    printf( "\n" ) ;
+    return 0 ;
+}//end function
 
-    delete[] data;  // ลบหน่วยความจำที่จองไว้
-    return 0;
-}
+int GetSet( int arr[ ] ) {
+    int n ;
+    arr = new int[ n ] ;
+    printf( "Enter the number of elements: " ) ;
+    scanf( "%d", &n ) ;
 
-// ฟังก์ชันรับค่าจากผู้ใช้
-void GetMatrix(int *value, int row, int col) {
-    cout << "Enter the matrix elements:\n";
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < col; j++) {
-            cout << "Element [" << i << "][" << j << "]: ";
-            cin >> value[i * col + j];  // คำนวณ index ตามอาร์เรย์ 1 มิติ
-        }
-    }
-}
+    printf( "Enter the elements: " ) ;
+    for ( int i = 0 ; i < n ; i++ ) {
+        scanf( "%d", &arr[ i ] ) ;
+    }//end for
 
-// ฟังก์ชันแสดงค่าใน Matrix
-void PrintMatrix(int *value, int row, int col) {
-    cout << "Matrix:\n";
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < col; j++) {
-            cout << value[i * col + j] << " ";
-        }
-        cout << endl;
-    }
-}
+    printf( "Number of elements: %d\n", n ) ;
+    for (int i = 0 ; i < n ; i++ ) {
+    printf( "%d ", arr[ i ] ) ;
+    }//end for
+    printf( "\n" ) ;
+
+    return n ;
+}//end function
