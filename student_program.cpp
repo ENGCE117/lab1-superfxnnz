@@ -1,31 +1,45 @@
 #include <stdio.h>
 
-int GetSet( int arr[ ] ) ;
+int *GetMatrix( int *row, int *col ) ;// ประกาศใช้ฟังก์ชั่น  GetMatrix
 
 int main() {
-    int *data, num ;  // กำหนดอาร์เรย์ขนาดคงที่
-    num = GetSet( data ) ;
-
-    printf( "\n" ) ;
-    return 0 ;
+    int *data, m, n ;
+    data = GetMatrix( &m, &n ) ;//เรียกใช้ฟังก์ชั่น
+    return 0 ;//จบการทำงาน
 }//end function
 
-int GetSet( int arr[ ] ) {
-    int n ;
-    arr = new int[ n ] ;
-    printf( "Enter the number of elements: " ) ;
-    scanf( "%d", &n ) ;
+ 
+int *GetMatrix( int *row, int *col ) {
+    int *value ;
+    scanf( "%d %d", row, col ) ;//ใส่แถว คอลัมน์
 
-    printf( "Enter the elements: " ) ;
-    for ( int i = 0 ; i < n ; i++ ) {
-        scanf( "%d", &arr[ i ] ) ;
-    }//end for
+    value = new int [*row * *col] ;
+ 
 
-    printf( "Number of elements: %d\n", n ) ;
-    for (int i = 0 ; i < n ; i++ ) {
-    printf( "%d ", arr[ i ] ) ;
-    }//end for
-    printf( "\n" ) ;
+    if( *row == 0 && *col == 0 ) {
+        printf( "Enter number of rows and columns: 0 0" ) ;
+    }
+    else if( ( *row == 0 && *col > 0 ) || ( *row > 0 && *col == 0 ) ) {
+        printf( "Error: Invalid matrix dimensions.\n" ) ;
+    }else{
+        printf( "Enter the elements of matrix: " ) ;
+        for( int i = 0 ; i < *row ; i++ ) {
+            for( int j = 0 ; j < *col ; j++ ) {
+                scanf( "%d", &value[ i * ( *col ) + j ]  ) ; 
+                if( getchar() == '\n' &&  i == *row - 1 && j == *col - 2 ) {
+					printf( "Error: Invalid matrix input" ) ;
+					return 0 ;
+				}//end if
+            }//end for
+        }//end for
 
-    return n ;
-}//end function
+        printf( "Matrix (%dx%d): \n", *row, *col ) ;
+        for( int i = 0 ; i < *row ; i++ ) {
+            for( int j = 0 ; j < *col ; j++ ) {
+                printf( "%d ", value[ i * ( *col ) + j ] ) ;//แสดงค่าทีละตัว
+            }
+            printf( "\n" ) ;
+        }//end for
+    }//end else
+    return value ;
+ }//end function
